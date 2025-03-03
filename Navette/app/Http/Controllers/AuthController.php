@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auth;
-use App\Http\Requests\StoreAuthRequest;
 use App\Http\Requests\UpdateAuthRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -30,16 +30,27 @@ class AuthController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAuthRequest $request)
+    public function store(Request $request)
     {
-        $user = User::create([
-        'name' => $request->name,
-        'tel'=>$request->tel,
-        'email'=>$request->email,
-        'password'=>$request->password,
-        'role_id' => $request->role_id,
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6',
+            'telephone' => 'required|min:10',
+            'role_id' => '',
         ]);
 
+
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'telephone' => $validatedData['telephone'],
+            'role_id' => $validatedData['role_id'],
+            'password' => bcrypt($validatedData['password'])
+        ]);
+    }
+    public function conn(){
+        return view ('connexion');
     }
 
     /**
@@ -47,7 +58,7 @@ class AuthController extends Controller
      */
     public function show(Auth $auth)
     {
-        //
+
     }
 
     /**

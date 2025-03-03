@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/registerClient',[AuthController::class,'indexCl'])->name('registerCl');
 Route::get('/registerSociete',[AuthController::class,'indexSoc'])->name('registerSoc');
-Route::post('/inscription',[AuthController::class,'create'])->name('inscription');
+Route::post('/inscription',[AuthController::class,'store'])->name('inscription');
+Route::get('/connexion',[AuthController::class,'conn'])->name('connexion');
 
 Route::get('/', function () {
     return view('welcome');
