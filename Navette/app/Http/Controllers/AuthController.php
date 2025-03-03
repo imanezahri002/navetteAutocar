@@ -58,7 +58,7 @@ class AuthController extends Controller
      */
     public function show(Auth $auth)
     {
-
+        
     }
 
     /**
