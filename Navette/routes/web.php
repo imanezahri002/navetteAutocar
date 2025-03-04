@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,13 @@ Route::get('/registerClient',[AuthController::class,'indexCl'])->name('registerC
 Route::get('/registerSociete',[AuthController::class,'indexSoc'])->name('registerSoc');
 Route::post('/inscription',[AuthController::class,'store'])->name('inscription');
 Route::get('/connexion',[AuthController::class,'conn'])->name('connexion');
+Route::post('/login',[AuthController::class,'login'])->name('login');
+
+Route::get('/ajouterVoyage',[VoyageController::class,'create']);
+Route::post('/ajouterVoyage',[VoyageController::class,'store']);
+Route::get('/listeVoyage',[VoyageController::class,'index']);
+
 
 Route::get('/', function () {
-    return view('welcome');
+    return view ('welcome');
 });

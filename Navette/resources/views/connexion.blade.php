@@ -10,6 +10,7 @@
     <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-center">Connexion</h2>
         <form action="/login" method="POST" class="space-y-4">
+            @csrf
             <div>
                 <label class="block text-sm font-medium">Email</label>
                 <input type="email" name="email" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300" required>

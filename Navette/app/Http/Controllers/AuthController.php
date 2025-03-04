@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Auth;
 use App\Http\Requests\UpdateAuthRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -14,18 +17,12 @@ class AuthController extends Controller
      */
     public function indexCl()
     {
-        return view ('registerClient');
+        return view('registerClient');
     }
     public function indexSoc(){
-        return view ('registerSociete');
+        return view('registerSociete');
     }
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
 
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -48,6 +45,7 @@ class AuthController extends Controller
             'role_id' => $validatedData['role_id'],
             'password' => bcrypt($validatedData['password'])
         ]);
+        return view ('welcome');
     }
     public function conn(){
         return view ('connexion');
@@ -56,25 +54,21 @@ class AuthController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Auth $auth)
+    public function login(Request $request)
     {
-        
-    }
+        $validatedData = $request->validate([
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Auth $auth)
-    {
-        //
-    }
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            return view('client.homePage');
+        } else {
+            return back()->withErrors(['email' => 'Les informations de connexion sont incorrectes.']);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAuthRequest $request, Auth $auth)
-    {
-        //
     }
 
     /**
