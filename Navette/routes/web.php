@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ViewController;
 use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,9 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::get('/ajouterVoyage',[VoyageController::class,'create']);
 Route::post('/ajouterVoyage',[VoyageController::class,'store']);
 Route::get('/listeVoyage',[VoyageController::class,'index']);
+
+
+Route::get('/dashboard',[ViewController::class,'index']);
 
 
 Route::get('/', function () {
