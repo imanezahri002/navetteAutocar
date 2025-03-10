@@ -61,14 +61,11 @@ class AuthController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        if ($user && Hash::check($request->password, $user->password)) {
-            Auth::login($user);
-            return view('client.homePage');
+        if (Auth::attempt($validatedData)) {
+            return redirect('/homepage');
         } else {
             return back()->withErrors(['email' => 'Les informations de connexion sont incorrectes.']);
         }
-
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\VoyageController;
+use App\Http\Middleware\AuthPermission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +33,7 @@ Route::get('/editVoyage/{voyage:id}',[VoyageController::class,'edit'])->name('ed
 Route::post('/updateVoyage/{voyage:id}',[VoyageController::class,'update'])->name('updateVoyage');
 Route::get('/deleteVoyage/{voyage:id}',[VoyageController::class,'destroy'])->name('deleteVoyage');
 
-Route::get('/addTag',[TagController::class,'add'])->name('addTag');
+Route::get('/addTag',[TagController::class,'add'])->name('addTag')->middleware('auth');
 Route::get('/listeTags',[TagController::class,'index'])->name('listeTags');
 Route::post('/ajouterTag',[TagController::class,'store'])->name('insertionTag');
 Route::get('/ediTag/{tag:id}',[TagController::class,'edit'])->name('editag');
@@ -41,8 +42,9 @@ Route::get('/deleTag/{tag:id}',[TagController::class,'destroy'])->name('deletag'
 
 Route::get('/roles',[RoleController::class,'index'])->name('displayRoles');
 Route::get('/createRole',[RoleController::class,'create'])->name('createRole');
-Route::post('/addRole',[RoleController::class,'insert'])->name('insertRole');
+Route::post('/addRole',[RoleController::class,'insert'])->name('insertRole')->middleware(AuthPermission::class,'insertRole');
 
+Route::get('/homepage',[ViewController::class,'index'])->name('clientHome')->middleware(AuthPermission::class,'clientHome');
 Route::get('/', function () {
     return view ('welcome');
 })->name('welcome');

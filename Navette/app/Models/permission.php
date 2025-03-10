@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class permission extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'name',
+        'url',
+    ];
 
+    
     public function role(){
         return $this->belongsToMany(Role::class,'role_permissions');
     }
