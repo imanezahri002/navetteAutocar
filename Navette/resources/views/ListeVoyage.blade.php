@@ -9,6 +9,12 @@
 <body class="flex items-center justify-center min-h-screen bg-gray-100 p-6">
     <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-center">Liste des Voyages</h2>
+        <a href="/ajouterVoyage">
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition mb-4">
+        Ajouter
+        </button>
+        </a>
+
         <table class="w-full border-collapse border border-gray-300">
             <thead>
                 <tr class="bg-gray-200">
@@ -32,12 +38,17 @@
                     <td class="border border-gray-300 p-2 text-center">{{$voyage->heure_depart}}</td>
                     <td class="border border-gray-300 p-2 text-center">{{$voyage->heure_arrivee}}</td>
                     <td class="border border-gray-300 p-2 text-center">{{$voyage->prix}}</td>
-                    <td class="border border-gray-300 p-2 text-center flex justify-center space-x-2"><button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
+                    <td class="border border-gray-300 p-2 text-center flex justify-center space-x-2">
+                        <a href="/editVoyage/{{$voyage->id}}"><button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">
                         ✏️ Edit
-                    </button>
+                                    </button>
+                        </a>
+                        <a href="/deleteVoyage/{{$voyage->id}}">
                     <button class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
                         🗑️ Delete
                     </button>
+                        </a>
+
                     </td>
                 </tr>
                 @endforeach

@@ -34,7 +34,6 @@ class AuthController extends Controller
             'email' => 'required|email|max:255',
             'password' => 'required|min:6',
             'telephone' => 'required|min:10',
-            'role_id' => '',
         ]);
 
 
@@ -42,10 +41,11 @@ class AuthController extends Controller
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'telephone' => $validatedData['telephone'],
-            'role_id' => $validatedData['role_id'],
+            'role_id' => 2,
             'password' => bcrypt($validatedData['password'])
         ]);
-        return view ('welcome');
+        Auth::login($user);
+        return view('client.homePage');
     }
     public function conn(){
         return view ('connexion');

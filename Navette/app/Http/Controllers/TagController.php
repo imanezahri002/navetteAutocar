@@ -8,17 +8,22 @@ use App\Http\Requests\UpdateTagRequest;
 
 class TagController extends Controller
 {
+    public function add(){
+        return view ('addTag');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $tags=Tag::all();
+        return view('listeTags',compact('tags'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
+
     public function create()
     {
         //
@@ -29,7 +34,10 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        Tag::create([
+            'name'=>$request->name,
+        ]);
+        return redirect ('/listeTags');
     }
 
     /**
@@ -45,7 +53,8 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('forEditTag',['tag' => $tag]);
+
     }
 
     /**
@@ -53,7 +62,10 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, Tag $tag)
     {
-        //
+        $tag->update([
+            'name'=>$request->name,
+        ]);
+        return redirect ('/listeTags');
     }
 
     /**
@@ -61,6 +73,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect('/listeTags');
     }
 }

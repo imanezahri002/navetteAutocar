@@ -31,8 +31,8 @@ class VoyageController extends Controller
      */
     public function store(StoreVoyageRequest $request)
     {
-        Voyage::create([
 
+        Voyage::create([
             'place'=>$request->place,
             'ville_depart'=>$request->ville_depart,
             'ville_arrivee'=>$request->ville_arrivee,
@@ -41,9 +41,10 @@ class VoyageController extends Controller
             'date_depart'=>$request->date_depart,
             'date_arrivee'=>$request->date_arrivee,
             'prix'=>$request->prix,
-
-
+            'societe_id'=>1,
         ]);
+        return redirect('/listeVoyage');
+
     }
 
     /**
@@ -51,7 +52,7 @@ class VoyageController extends Controller
      */
     public function show(Voyage $voyage)
     {
-        //
+
     }
 
     /**
@@ -59,7 +60,7 @@ class VoyageController extends Controller
      */
     public function edit(Voyage $voyage)
     {
-        //
+        return view('voyEdit',compact('voyage'));
     }
 
     /**
@@ -67,7 +68,18 @@ class VoyageController extends Controller
      */
     public function update(UpdateVoyageRequest $request, Voyage $voyage)
     {
-        //
+        Voyage::update([
+            'place'=>$request->place,
+            'ville_depart'=>$request->ville_depart,
+            'ville_arrivee'=>$request->ville_arrivee,
+            'heure_depart'=>$request->heure_depart,
+            'heure_arrivee'=>$request->heure_arrivee,
+            'date_depart'=>$request->date_depart,
+            'date_arrivee'=>$request->date_arrivee,
+            'prix'=>$request->prix,
+            'societe_id'=>1,
+        ]);
+        return redirect('/listeVoyage');
     }
 
     /**
@@ -75,6 +87,7 @@ class VoyageController extends Controller
      */
     public function destroy(Voyage $voyage)
     {
-        //
+        $voyage->delete();
+        return redirect('/listeVoyage');
     }
 }

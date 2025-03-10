@@ -11,7 +11,8 @@
 <body class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
         <h2 class="text-2xl font-bold mb-6 text-center">Ajouter un Voyage</h2>
-        <form action="/voyages" method="POST" class="space-y-4">
+        <form action="{{route('addVoyage')}}" method="POST" class="space-y-4">
+            @csrf
             <div>
                 <label class="block text-sm font-medium">Nombre de places</label>
                 <input type="number" name="place" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
@@ -26,25 +27,25 @@
             </div>
             <div>
                 <label class="block text-sm font-medium">Heure de départ</label>
-                <input type="date" name="heure_depart" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                <input type="time" name="heure_depart" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
             </div>
             <div>
                 <label class="block text-sm font-medium">Heure d'arrivée</label>
-                <input type="date" name="heure_arrivee" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
+                <input type="time" name="heure_arrivee" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
             </div>
             <div>
-                <label class="block text-sm font-medium">Heure d'arrivée</label>
+                <label class="block text-sm font-medium">Date d'arrivée</label>
                 <input type="date" name="date_depart" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
             </div>
             <div>
-                <label class="block text-sm font-medium">Heure d'arrivée</label>
+                <label class="block text-sm font-medium">Date d'arrivée</label>
                 <input type="date" name="date_arrivee" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
             </div>
             <div>
                 <label class="block text-sm font-medium">Prix</label>
                 <input type="number" step="0.01" name="prix" class="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-300">
             </div>
-            
+
             <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700">Ajouter</button>
         </form>
     </div>

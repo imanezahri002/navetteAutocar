@@ -11,7 +11,7 @@ class UpdateVoyageRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdateVoyageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'place'=>'required|min:1',
+            'ville_depart'=>'required|string',
+            'ville_arrivee'=>'required|string',
+            'heure_depart'=>'required',
+            'heure_arrivee'=>'required',
+            'date_depart'=>'required',
+            'date_arrivee'=>'required',
+            'prix'=>'required'
         ];
     }
 }
